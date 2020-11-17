@@ -10,17 +10,21 @@ import InsertCourse from "./components/InsertCourseForm.js";
 
 export default function FileRead(props) {
     return(
-        <div class="fileRead">
-            <div class = "input-group-prepend">
-                <span class = "input-group=text" id="inputGroupFileAddon01">Upload</span>
-            </div>
-            <div class = "custom-file">
-                <input type = "file" class = "custom-file-input" id="inputGroupFile01"
-                aria-describedby="inputGroupFileAddon01">
-                    <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
-                </input>
-            </div>
-        </div>
+        <input type="file" id="file-input" />
+        <button id="read-button">Read File</button>
+    <pre id="file-contents"></pre>
+
+<script>
+	document.querySelector("#read-button").addEventListener('click', function() {
+		let file = document.querySelector("#file-input").files[0];
+		let reader = new FileReader();
+		reader.addEventListener('load', function(e) {
+	    		let text = e.target.result;
+	    		document.querySelector("#file-contents").textContent = text;
+		});
+		reader.readAsText(file);
+	});
+</script>
 
     )
 }
